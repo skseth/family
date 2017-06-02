@@ -4,19 +4,25 @@
   "description": "manage family and relationships",
   "repository": "https://github.com/skseth/family",
   "scripts": {
-    "start": "node app.js"
+    "start": "node app.js",
+    "test": "ava test/*.test.js"
   },
   "author": "Samir Seth",
   "license": "Apache-2.0",
   "dependencies": {
     "body-parser": "~1.17.1",
     "express": "~4.15.2",
-    "jade": "~1.11.0",
     "mongodb": "~2.2.25",
+    "mongoose": "^4.10.4",
     "nconf": "~0.8.4",
     "prompt": "~1.0.0"
   },
   "engines": {
     "node": ">=7.0.0"
+  },
+  "devDependencies": {
+    "ava": "^0.19.1",
+    "sinon": "^2.3.2",
+    "supertest": "^3.0.0"
   }
 }
