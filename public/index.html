@@ -1,5 +1,46 @@
+<!DOCTYPE html>
 <html>
+
+<head>
+    <title>Express</title>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+
 <body>
-	<p>Hello, World!</p>
+
+    <div id="addPerson">
+    		<h2>Add Person</h2>
+            <input id="personname" type="text" placeholder="name">
+            <br/>
+            <input id="personemail" type="text" placeholder="email">
+            <br/>
+            <button id="btnAddPerson">Add Person</button>
+    </div>
+
+    <div>
+    	<h2>View Person</h2>
+    	<p><b>Name:</b><span id="infoname"></span></p>
+    	<p><b>Email:</b><span id="infoemail"></span></p>
+    </div>
+
+    <!-- Wrapper-->
+    <div>
+        <h2>Person List</h2>
+        <div id="personList" class="box-table-a">
+            <table>
+                <thead>
+                    <th>UserName</th>
+                    <th>Email</th>
+                    <th>Delete?</th>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+
+
+
+    <script src="/javascript/client.js"></script>
 </body>
+
 </html>

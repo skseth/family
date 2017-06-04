@@ -70,7 +70,11 @@ var PersonSchema   = new Schema({
         type: String,
         required: true
       },
-  	created_at: Date,
+    email: {
+        type: String,
+        required: false
+      },  	
+    created_at: Date,
   	updated_at: Date
 }, { bufferCommands: false });
 
@@ -92,7 +96,22 @@ function create(data) {
 	return Person(data).save()
 }
 
+function list() {
+  return Person.find({}).exec()
+}
+
+function remove(personid) {
+  return Person.findByIdAndRemove(personid)
+}
+
+function getById(personid) {
+  return Person.findById(personid)
+}
+
 module.exports = {
-	create
+	create,
+  list,
+  remove,
+  getById
 }
 
