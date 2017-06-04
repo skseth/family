@@ -3,56 +3,41 @@
 
 const express = require('express');
 const bodyParser = require('body-parser');
+const PersonApp = require('./app.js').PersonApp
 // TODO - support datastore + mongo
-const personmodel = require('./model-mongodb.js');
-
-// set up router for persons api
-const router = express.Router();
-router.use(bodyParser.json());
-
-router.get('/', (req, res, next) => {
-	personmodel.list()
-	.then((persons) => {
-		res.json(persons)
-	})
-	.catch((err) => {
-		res.json({"error": err})
-	})
-})
-
-router.post('/', (req, res, next) => {
-	personmodel.create(req.body)
-	.then((entity) => {
-		res.json(entity)
-	})
-	.catch((err) => {
-		res.json({"error": err})
-	})
-
-})
 
 
-router.delete('/:personid', (req, res, next) => {
-	personmodel.remove(req.params.personid)
-	.then(() => {
-		res.json({deleted: req.params.personid})
-	})
-	.catch((err) => {
-		res.json({"error": err})
-	})
-})
+class PersonApi {
+	constructor(db) {
+		this._router = express.Router()
+		this._app = new PersonApp(db)
+		this._initRoutes()
+	}
 
+	_initRoutes() {
+		this._router.use(bodyParser.json());
+		this._router.get('/', handleroute((req) => this._app.list()))
+		this._router.post('/', handleroute((req) => this._app.create(req.body)))
+		this._router.delete('/:personid', handleroute((req) => this._app.remove(req.params.personid)))
+		this._router.get('/:personid', handleroute((req) => this._app.getById(req.params.personid)))
+	}
 
-router.get('/:personid', (req, res, next) => {
-	personmodel.getById(req.params.personid)
-	.then((person) => {
-		res.json(person)
-	})
-	.catch((err) => {
-		res.json({"error": err})
-	})
-})
+	get Router() {
+		return this._router
+	}
 
+}
 
+function handleroute(fn) {
+	return (req, res, next) => {
+		fn(req)		
+		.then((resp) => {
+			res.status(resp.status).json(resp.body)
+		})
+		.catch((err) => {
+			res.status(500).json({"error": err})
+		})
+	}
+}
 
-module.exports = router
+module.exports.PersonApi = PersonApi

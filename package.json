@@ -4,7 +4,7 @@
   "description": "manage family and relationships",
   "repository": "https://github.com/skseth/family",
   "scripts": {
-    "start": "node app.js",
+    "start": "node webserver.js",
     "test": "ava test/*.test.js"
   },
   "author": "Samir Seth",

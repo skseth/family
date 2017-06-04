@@ -17,7 +17,12 @@ function populateTable() {
 
     fetch('/api/persons')
     .then(function(response) { 
-        return response.json()
+    	if (response.ok) {
+	        return response.json()
+    	}
+    	else {
+    		throw "Error"
+    	}
     })
     .then(function(data) {
         personListData = data;
@@ -47,7 +52,10 @@ function populateTable() {
         const btnAddPerson = document.querySelector('#btnAddPerson')
         btnAddPerson.addEventListener('click', addPerson)
 
-    });
+    })
+    .catch((e) => {
+       alert(`Error - ${e}`)
+    })
 };
 
 // Show User Info

@@ -3,12 +3,17 @@
 const path = require('path');
 const express = require('express');
 const config = require('./config');
+const PersonApi = require('./persons/api').PersonApi
+const db = require('./db/mongoose.js')
 
 const app = express();
 
 app.use('/', express.static(path.join(__dirname, 'public')))
 
-app.use('/api/persons', require('./persons/api'))
+
+const personApi = new PersonApi(db)
+
+app.use('/api/persons', personApi.Router)
 
 // Basic 404 handler
 app.use((req, res) => {

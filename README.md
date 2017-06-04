@@ -16,4 +16,6 @@
 * use of pub-sub model for workers
 * high quality api design
 * graphql
-
+* Best practices for designing a pragmatic restful api - http://
+* www.vinaysahni.com/*best-practices-for-a-pragmatic-restful-api
+* correct management of timestamps
