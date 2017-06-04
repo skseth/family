@@ -14,4 +14,6 @@
 * decoupling app and server
 * initialize, then using event emitters for ready state
 * use of pub-sub model for workers
+* high quality api design
+* graphql
 
