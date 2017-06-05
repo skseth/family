@@ -8,9 +8,9 @@ const PersonApp = require('./app.js').PersonApp
 
 
 class PersonApi {
-	constructor(db) {
+	constructor(databackend, db) {
 		this._router = express.Router()
-		this._app = new PersonApp(db)
+		this._app = new PersonApp(databackend, db)
 		this._initRoutes()
 	}
 
@@ -25,7 +25,6 @@ class PersonApi {
 	get Router() {
 		return this._router
 	}
-
 }
 
 function handleroute(fn) {

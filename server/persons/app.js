@@ -1,14 +1,16 @@
 'use strict';
 // knows nothing about http
 
-const PersonModel = require('./model-mongodb.js').PersonModel;
-
-
+//const PersonModel = require('./model-mongodb.js').PersonModel;
 
 class PersonApp {
 
-	constructor(db) {
-		this._model = new PersonModel(db);
+	constructor(databackend, db) {
+		const PersonModel = require(`./model-${databackend}.js`).PersonModel;	
+		this._model = new PersonModel(db)	
+	}
+
+	_initModel(databackend) {
 	}
 
 	list() {

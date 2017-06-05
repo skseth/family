@@ -1,18 +1,11 @@
 'use strict';
 
 const personSchemaDefn = {
-    name: {
-        type: String,
-        required: true
-      },
-    email: {
-        type: String,
-        required: false
-      },    
+    name: { type: String, required: true },
+    email: { type: String, required: false },    
     created_at: Date,
     updated_at: Date
 }
-
 
 function personprefn(next) {
   var currentDate = new Date();
@@ -26,8 +19,8 @@ function personprefn(next) {
 }
 
 class PersonModel {
-  constructor(mongoose) {
-    this._mongoose = mongoose
+  constructor(db) {
+    this._mongoose = db.Mongoose
     this.Person = this._initPersonSchema()
   }
 
@@ -36,7 +29,6 @@ class PersonModel {
     schema.pre('save', personprefn)
     return this._mongoose.model('Person', schema)
   }
-
 
   create(data) {
     return this.Person(data).save()
@@ -53,7 +45,6 @@ class PersonModel {
   getById(personid) {
     return this.Person.findById(personid)
   }
-
 }
 
 module.exports.PersonModel = PersonModel

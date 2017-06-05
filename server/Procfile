@@ -1,0 +1,3 @@
+mongo:mongod -dbpath ../_dev/data 
+web:npm start
+
